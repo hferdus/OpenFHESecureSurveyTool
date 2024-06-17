@@ -4,11 +4,12 @@ import tempfile
 import os
 
 
-datafolder = "/home/christopherjoseph/Downloads/client_server/demoData"
+#datafolder = "/home/christopherjoseph/Downloads/client_server/demoData"
+
 
 	
 # Deserialize the crypto-context, ciphertext, pk,sk
-def deserialize(datafolder):
+def deserialize(datafolder,responses):
 
 	serType = BINARY
 
@@ -17,7 +18,7 @@ def deserialize(datafolder):
             raise Exception(f"Could not read the cc.txt")
         
 	ct = []
-	for i in range(10):  
+	for i in range(responses):  
 		holder, res = DeserializeCiphertext(datafolder + f"/ciphertext_{i}.txt", serType)
 		ct.append(holder)
 		if not res:
@@ -62,10 +63,14 @@ def main_action():
 	print("-------Program Start-------")
 	
 	print(" ")
-	datafolder = "/home/christopherjoseph/Downloads/client_server/demoData"
+	datafolder = input("Please enter the path of your desired storage folder: ")
 	print(" ")
 	
-	cc,ct,pk,sk = deserialize(datafolder)
+	print(" ")
+	responses = int(input("How many user responses are to be averaged? : "))
+	print(" ")
+	
+	cc,ct,pk,sk = deserialize(datafolder,responses)
 	
 	computed_ciphertext,div_avg = computes(cc,ct,pk)
 	
