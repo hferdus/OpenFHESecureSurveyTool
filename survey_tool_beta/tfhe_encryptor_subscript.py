@@ -161,8 +161,8 @@ def main_encryption():
 	print(" ")
 	print("-------Program End-------")
 	
-def partial_decrypt():
-	
+def partial_decrypt(no_resp):
+
 	serType = BINARY
 	
 	sk1, res = DeserializePrivateKey("/home/christopherjoseph/Downloads/survey_tool_beta_version/client_stor/keys" + f"/sk1.txt", serType)
@@ -191,8 +191,10 @@ def partial_decrypt():
 	plaintext = Plaintext.GetPackedValue(plaintext)
 	
 	plaintext = plaintext[0]
+
+	no_resp = 1/(no_resp)
 	
-	avg = plaintext*0.1
+	avg = plaintext*(no_resp)
 	
 	avg = bytearray(struct.pack("f",avg))
 	
